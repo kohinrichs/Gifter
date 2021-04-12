@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Gifter.Repositories
 {
-    public interface IUserRepository
+    public interface IUserProfileRepository
     {
         void Add(UserProfile userProfile);
         void Delete(int id);

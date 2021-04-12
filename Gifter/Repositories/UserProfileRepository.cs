@@ -7,9 +7,9 @@ using Gifter.Utils;
 
 namespace Gifter.Repositories
 {
-    public class UserRepository : BaseRepository, IUserRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
-        public UserRepository(IConfiguration configuration) : base(configuration) { }
+        public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
         public List<UserProfile> GetAll()
         {
@@ -54,7 +54,7 @@ namespace Gifter.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                 SELECT Id, [Name], Email, ImageUrl, DateCreated 
+                 SELECT Id, [Name], Email, Bio, ImageUrl, DateCreated 
                     FROM UserProfile
                     WHERE Id = @Id";
 
