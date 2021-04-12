@@ -13,6 +13,9 @@ namespace Gifter.Models
 
         [Required]
         public string Email { get; set; }
+        [Required]
+
+        public string Bio { get; set; }
 
         public string ImageUrl { get; set; }
 
