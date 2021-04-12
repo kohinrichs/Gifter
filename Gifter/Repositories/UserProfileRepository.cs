@@ -106,17 +106,21 @@ namespace Gifter.Repositories
                     var reader = cmd.ExecuteReader();
 
                     UserProfile userProfile = null;
-                    if (reader.Read())
+
+                    while (reader.Read())
                     {
-                        userProfile = new UserProfile()
+                        if (userProfile == null)
                         {
-                            Id = id,
-                            Name = DbUtils.GetString(reader, "Name"),
-                            Bio = DbUtils.GetString(reader, "Bio"),
-                            DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                            ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
-                            Posts = new List<Post>()
-                        };
+                            userProfile = new UserProfile()
+                            {
+                                Id = id,
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Bio = DbUtils.GetString(reader, "Bio"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                                Posts = new List<Post>()
+                            };
+                        }
 
                         if (DbUtils.IsNotDbNull(reader, "PostId"))
                         {
@@ -131,10 +135,10 @@ namespace Gifter.Repositories
                             });
                         }
                     }
+                      
+                        reader.Close();
 
-                    reader.Close();
-
-                    return userProfile;
+                        return userProfile;
                 }
             }
         }
