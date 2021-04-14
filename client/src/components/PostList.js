@@ -5,8 +5,6 @@ import Post from "./Post";
 const PostList = () => {
     const { posts, getAllPosts, searchPosts, searchTerms } = useContext(PostContext);
 
-    const [filteredPosts, setFiltered] = useState([])
-
     useEffect(() => {
         getAllPosts();
     }, []);
