@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
 import { PostContext } from "../providers/PostProvider";
+import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
     const { addPost, getAllPosts } = useContext(PostContext)
@@ -7,12 +9,14 @@ const PostForm = () => {
     // wait for data before button is active. Look at the button to see how it's setting itself to disabled or not based on this state
     // const [isLoading, setIsLoading] = useState(true);
 
+    // Use this hook to allow us to programatically redirect users
+    const history = useHistory();
 
     const [post, setPost] = useState({
         title: "",
         imageUrl: "",
         caption: "",
-        userProfileId: 1
+        userProfileId: 1,
     })
 
     //when field changes, update state. This causes a re-render and updates the view.
@@ -37,13 +41,15 @@ const PostForm = () => {
         })
             // Calling two functions inside the anonymous .then function
             .then(() => {
-                getAllPosts()
-                setPost({
-                    title: "",
-                    imageUrl: "",
-                    caption: "",
-                    userProfileId: 1
-                })
+                // Navigate the user back to the home route
+                history.push("/");
+                // getAllPosts()
+                // setPost({
+                //     title: "",
+                //     imageUrl: "",
+                //     caption: "",
+                //     userProfileId: 1
+                // })
             })
     }
 
